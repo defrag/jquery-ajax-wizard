@@ -69,9 +69,18 @@ describe("Wizard", function() {
 
     it("should render its basic skeleton template with first step", function() {        
         var step1 = new WizardStep({url: '/foobar'});
+
+        spyOn(step1, 'load').andCallFake(function (req) {
+            var d = $.Deferred();
+            d.resolve();
+            return d.promise();
+        });
+
         wizard.addStep(step1);
         wizard.render();
         expect(wizard.currentStep).toEqual(step1);
+        expect(wizard.$content.find('div.wizard-step').length).toEqual(1);
+        expect(step1.load).toHaveBeenCalled();
     });
 
 
