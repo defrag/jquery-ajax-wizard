@@ -1,0 +1,39 @@
+{
+  "name": "wizards",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/michaldabrowski/wizards",
+  "author": {
+    "name": "Michal Dabrowski",
+    "email": "dabrowski@brillante.pl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/michaldabrowski/wizards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michaldabrowski/wizards/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/michaldabrowski/wizards/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/wizards",
+  "engines": {
+    "node": ">= 0.6.0"
+  },
+  "scripts": {
+    "test": "grunt jasmine"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-contrib-jasmine": "~0.4.0",
+    "grunt": "~0.4.1"
+  },
+  "keywords": []
+}
