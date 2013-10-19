@@ -90,8 +90,6 @@ describe("Wizard", function() {
         wizard.addStep(step2);
         wizard.addStep(step3);
 
-        var step1Complete, step2Complete, step3Complete = false;
-
         spyOn($, 'ajax').andCallFake(function (req) {
             var d = $.Deferred();
             d.resolve('<p>ffffuuuuuubar1</p>');
@@ -113,7 +111,32 @@ describe("Wizard", function() {
         expect(wizard.currentStep).toEqual(step3);
         expect(wizard.isOnLastStep()).toEqual(true);
 
+    });
 
+    it("doesnt proceed to next step if validation failed", function() {
+        spyOn($, 'ajax').andCallFake(function (req) {
+            var d = $.Deferred();
+            d.resolve('<p>ffffuuuuuu</p>');
+            return d.promise();
+        });
+
+        var step1 = new WizardStep({
+            url: '/foobar1',
+            validate: function() {
+                return $.Deferred().reject().promise();
+            }
+        });
+        var step2 = new WizardStep({url: '/foobar2'});
+        spyOn(step2, 'load');
+
+        wizard.addStep(step1);
+        wizard.render();
+        clock.tick(100);
+        expect(wizard.currentStep).toEqual(step1);
+        wizard.nextStep();
+        clock.tick(100);
+        expect(wizard.currentStep).toEqual(step1);
+        expect(step2.load).not.toHaveBeenCalled();
     });
 
 });

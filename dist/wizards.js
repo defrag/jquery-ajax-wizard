@@ -130,7 +130,9 @@
     };
 
     Wizard.prototype.finalize = function() {
-
+        this.$el.find('.wizard').wrap('<form id="wizard-form"></form>');
+        var data = this.$el.find('#wizard-form').serialize();
+        this.$el.find('.wizard').unwrap();
     };
 
     WizardStep = function(options) {
