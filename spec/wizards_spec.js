@@ -1,9 +1,14 @@
 describe("WizardStep", function() {
 
-    var step;
+    var step, clock;
 
     beforeEach(function() {
         step = new WizardStep({url: '/foobar'});
+        clock = sinon.useFakeTimers();
+    });
+
+    afterEach(function() {        
+        clock.restore();   
     });
 
     it("should be initializable with url option", function() {
@@ -17,35 +22,29 @@ describe("WizardStep", function() {
             d.resolve('<p>ffffuuuuuu</p>');
             return d.promise();
         });
-
-        var asyncCallComplete = false;
-
-        runs(function() {
-            step.load().done(function() {
-                asyncCallComplete = true;
-            });
-        });
-
-        waitsFor(function() {
-            return false !== asyncCallComplete;
-        });
-
-        runs(function() {
-            expect(step.content).toBe('<p>ffffuuuuuu</p>');
-            expect($.ajax.mostRecentCall.args[0]["url"]).toEqual('/foobar');
-        });
-
+        
+        step.load();
+        clock.tick(100);
+        expect(step.content).toBe('<p>ffffuuuuuu</p>');
+        expect($.ajax.mostRecentCall.args[0]["url"]).toEqual('/foobar');
+        
     });
 });
 
 describe("Wizard", function() {
 
-    var wizard;
+    var wizard, clock;
 
     beforeEach(function() {
         $('body').append('<div id="wizard"></div>');
         wizard = new Wizard('wizard');
+        clock = sinon.useFakeTimers();
     });
+
+    afterEach(function() {        
+        clock.restore();   
+    });
+
 
     it("should not have any steps by default", function() {
         expect(wizard.steps.length).toEqual(0);
@@ -99,46 +98,21 @@ describe("Wizard", function() {
             return d.promise();
         });
 
-        runs(function() {
-            wizard.render().done(function() {
-                step1Complete = true;
-            });
-        });
-        waitsFor(function() {
-            return false !== step1Complete;
-        });
-        runs(function() {
-            expect(wizard.currentStep).toEqual(step1);
-            expect(wizard.isOnLastStep()).toEqual(false);
-        });
+        wizard.render();
+        clock.tick(100);    
+        expect(wizard.currentStep).toEqual(step1);
+        expect(wizard.isOnLastStep()).toEqual(false);
 
-        // ------ Step2 ------ //
-        runs(function() {
-            wizard.nextStep().done(function() {
-                step2Complete = true;
-            });
-        });
-        waitsFor(function() {
-            return false !== step2Complete;
-        });
-        runs(function() {
-            expect(wizard.currentStep).toEqual(step2);
-            expect(wizard.isOnLastStep()).toEqual(false);
-        });
+        wizard.nextStep();
+        clock.tick(100);    
+        expect(wizard.currentStep).toEqual(step2);
+        expect(wizard.isOnLastStep()).toEqual(false);
 
-        // ------ Step3 ------ //
-        runs(function() {
-            wizard.nextStep().done(function() {
-                step3Complete = true;
-            });
-        });
-        waitsFor(function() {
-            return false !== step3Complete;
-        });
-        runs(function() {
-            expect(wizard.currentStep).toEqual(step3);
-            expect(wizard.isOnLastStep()).toEqual(true);
-        });
+        wizard.nextStep();
+        clock.tick(100);    
+        expect(wizard.currentStep).toEqual(step3);
+        expect(wizard.isOnLastStep()).toEqual(true);
+
 
     });
 
