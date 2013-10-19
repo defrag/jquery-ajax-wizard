@@ -83,7 +83,7 @@ describe("Wizard", function() {
         expect(step1.load).toHaveBeenCalled();
     });
 
-    it("should load next steps asynchronously by default", function() {
+    it("should load next steps asynchronously by default and update current step", function() {
         var step1 = new WizardStep({url: '/foobar1'});
         var step2 = new WizardStep({url: '/foobar2'});
         var step3 = new WizardStep({url: '/foobar3'});
