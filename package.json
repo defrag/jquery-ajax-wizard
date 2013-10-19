@@ -1,5 +1,5 @@
 {
-  "name": "jquery-ajax-wizard",
+  "name": "wizards",
   "description": "Library to help manage multi step wizards with ajax loaded content.",
   "version": "0.1.0",
   "homepage": "https://github.com/defrag/jquery-ajax-wizard",

@@ -1,5 +1,5 @@
-/*! wizards - v0.1.0 - 2013-10-17
-* https://github.com/michaldabrowski/wizards
+/*! wizards - v0.1.0 - 2013-10-19
+* https://github.com/defrag/jquery-ajax-wizard
 * Copyright (c) 2013 Michal Dabrowski; Licensed MIT */
 (function($, w) {
     "use strict";
@@ -10,7 +10,7 @@
     Wizard = function(elementId, options) {
         var self = this;
         this.steps = [];
-        this.elementId = elementId;
+        this.elementId = '#' + elementId;
         this.currentIndex = -1;
         this.options = {};
         this.currentStep = null;
@@ -44,10 +44,7 @@
 
             self.$nextButton.on('click', function(e) {
                 e.preventDefault();
-                self.currentStep.doValidate().done(function() {
-                    var step = self.steps[++self.currentIndex];
-                    self.loadStep(step);
-                });
+                self.nextStep();                
             });
 
             self.$prevButton.on('click', function(e) {
@@ -55,8 +52,7 @@
                 if (self.$prevButton.hasClass('disabled')) {
                     return false;
                 }
-                var step = self.steps[--self.currentIndex];
-                self.loadStep(step);
+                self.prevStep();
             });
         };
 
@@ -71,6 +67,29 @@
         this.steps.push(step);
     };
 
+    Wizard.prototype.nextStep = function() {
+        var self = this;
+        if (self.isOnLastStep()) {
+            self.finalize();
+            return;
+        }
+
+        return self.currentStep.doValidate().done(function() {
+            var step = self.steps[++self.currentIndex];
+            self.loadStep(step);
+        });
+    };
+
+    Wizard.prototype.prevStep = function() {
+        var self = this;
+        var step = self.steps[--self.currentIndex];
+        return self.loadStep(step);
+    };
+
+    Wizard.prototype.isOnLastStep = function() {
+        return this.currentIndex === this.steps.length - 1;
+    };
+
     Wizard.prototype.loadStep = function(step) {
         var self = this;
         self.$prevButton.toggleClass("disabled", self.currentIndex === 0);
@@ -83,9 +102,9 @@
         }
 
         self.$loader.show();
-        step.load().done(function(){
+        return step.load().done(function(){
             self.$content.find('.wizard-step').hide();
-            self.$content.find('#wizard-step-'+step.id)
+            self.$content.find('#wizard-step-' + step.id)
                 .html(step.content)
                 .data('has-content', true)
                 .show();
@@ -104,7 +123,11 @@
         }
         var step = this.steps[++this.currentIndex];
         self.currentStep = step;
-        self.loadStep(step);
+        return self.loadStep(step);
+    };
+
+    Wizard.prototype.finalize = function() {
+
     };
 
     WizardStep = function(options) {
