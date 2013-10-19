@@ -45,7 +45,6 @@ describe("Wizard", function() {
         clock.restore();   
     });
 
-
     it("should not have any steps by default", function() {
         expect(wizard.steps.length).toEqual(0);
     });

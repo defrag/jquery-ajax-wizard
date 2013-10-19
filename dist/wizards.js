@@ -4,8 +4,7 @@
 (function($, w) {
     "use strict";
     
-    var WizardStep = {};
-    var Wizard = {};
+    var WizardStep, Wizard;
     
     Wizard = function(elementId, options) {
         var self = this;
