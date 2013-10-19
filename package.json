@@ -1,23 +1,23 @@
 {
-  "name": "wizards",
-  "description": "The best project ever.",
+  "name": "jQuery ajax wizards",
+  "description": "Library to help manage multi step wizards with ajax loaded content.",
   "version": "0.1.0",
-  "homepage": "https://github.com/michaldabrowski/wizards",
+  "homepage": "https://github.com/defrag/jquery-ajax-wizard",
   "author": {
     "name": "Michal Dabrowski",
     "email": "dabrowski@brillante.pl"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/michaldabrowski/wizards.git"
+    "url": "git://github.com/defrag/jquery-ajax-wizard.git"
   },
   "bugs": {
-    "url": "https://github.com/michaldabrowski/wizards/issues"
+    "url": "https://github.com/defrag/jquery-ajax-wizard/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/michaldabrowski/wizards/blob/master/LICENSE-MIT"
+      "url": "https://github.com/defrag/jquery-ajax-wizard/blob/master/LICENSE-MIT"
     }
   ],
   "main": "lib/wizards",
