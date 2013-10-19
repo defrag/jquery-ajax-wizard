@@ -73,11 +73,14 @@
             self.finalize();
             return;
         }
-
-        return self.currentStep.doValidate().done(function() {
+        var deffered = $.Deferred();
+        self.currentStep.doValidate().done(function() {
             var step = self.steps[++self.currentIndex];
-            self.loadStep(step);
+            self.loadStep(step).done(function() {
+                deffered.resolve();
+            });
         });
+        return deffered;
     };
 
     Wizard.prototype.prevStep = function() {
