@@ -44,6 +44,9 @@ _Also, please don't edit files in the "dist" subdirectory as they are generated 
 ## Release History
 _(Nothing yet)_
 
+## Todo
+Refactor specs
+
 ## License
 Copyright (c) 2013 Michal Dabrowski  
 Licensed under the MIT license.
