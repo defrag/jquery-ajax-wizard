@@ -1,5 +1,8 @@
 # jQuery ajax wizards
 
+[![Build Status](https://travis-ci.org/defrag/jquery-ajax-wizard.png)](https://travis-ci.org/defrag/jquery-ajax-wizard)
+
+
 The library aims to wrap the multi step wizards based on ajax content. 
 If You dont need each new step to be loaded via ajax, please use other avilable jquery wizards
 plugins. It operates on jQuery defered objects execution.
