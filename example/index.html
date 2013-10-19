@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Wizards example</title>
+    <script src="../bower_components/jquery/jquery.js"></script>
+    <script src="../lib/wizards.js"></script>
+</head>
+<body>
+    <h2>Wizards example</h2>
+    <div id="wizard"></div>
+
+    <script type="text/javascript">
+        $(function() {
+            var wizard = new Wizard('wizard');
+            wizard.addStep(new WizardStep({url: 'step1.html'}));
+            wizard.addStep(new WizardStep({url: 'step2.html'}));
+            wizard.render();
+        });
+    </script>
+
+</body>
+</html>

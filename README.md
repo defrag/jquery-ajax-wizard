@@ -34,7 +34,9 @@ wizard.render();
 _(Coming soon)_
 
 ## Examples
-_(Coming soon)_
+Enter lib directory and run:
+python -m SimpleHTTPServer 8001
+then see example at http://localhost:8001/example/
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
