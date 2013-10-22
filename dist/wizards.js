@@ -1,4 +1,4 @@
-/*! wizards - v0.1.0 - 2013-10-19
+/*! wizards - v0.1.0 - 2013-10-22
 * https://github.com/defrag/jquery-ajax-wizard
 * Copyright (c) 2013 Michal Dabrowski; Licensed MIT */
 (function($, w) {
@@ -14,7 +14,6 @@
         this.options = {};
         this.currentStep = null;
         $.extend(this.options, options || {});
-
         var wizardTemplate = [
 
                 '<div class="wizard">',
@@ -129,9 +128,13 @@
     };
 
     Wizard.prototype.finalize = function() {
-        this.$content.wrap('<form id="wizard-form"></form>');
-        var data = this.$el.find('#wizard-form').serialize();
-        this.$content.unwrap();        
+        var self = this;
+        self.$content.wrap('<form id="wizard-form"></form>');
+        var data = self.$el.find('#wizard-form').serialize();
+        self.$content.unwrap();     
+        if ($.isFunction(self.options.finalize)) {
+            this.options.finalize(data);
+        }
     };
 
     WizardStep = function(options) {

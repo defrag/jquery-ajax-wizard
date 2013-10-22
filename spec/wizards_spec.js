@@ -53,7 +53,18 @@ describe("Wizard", function() {
         expect(wizard.currentIndex).toEqual(-1);
     });
 
-    it("should be able to add teps", function() {
+    it("should call finalize option function if provided", function() {
+        var finalizeFn = jasmine.createSpy();
+        finalizeFn(function() {
+            return true;
+        });
+        var w = new Wizard('testEl', {
+            finalize: finalizeFn
+        });
+        expect(finalizeFn).toHaveBeenCalled();
+    });
+
+    it("should be able to add steps", function() {
         var step = new WizardStep({url: '/foobar'});
         wizard.addStep(step);
         expect(step.wizard).toEqual(wizard);

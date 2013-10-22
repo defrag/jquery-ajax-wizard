@@ -10,7 +10,11 @@
 
     <script type="text/javascript">
         $(function() {
-            var wizard = new Wizard('wizard');
+            var wizard = new Wizard('wizard', {
+                finalize: function () {
+                    console.log('Finalize');
+                }
+            });
             wizard.addStep(new WizardStep({url: 'step1.html'}));
             wizard.addStep(new WizardStep({url: 'step2.html'}));
             wizard.render();
