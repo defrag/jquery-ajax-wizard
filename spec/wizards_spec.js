@@ -55,9 +55,6 @@ describe("Wizard", function() {
 
     it("should call finalize option function if provided", function() {
         var finalizeFn = jasmine.createSpy();
-        finalizeFn(function() {
-            return true;
-        });
         var w = new Wizard('testEl', {
             finalize: finalizeFn
         });
