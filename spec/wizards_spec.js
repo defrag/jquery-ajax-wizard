@@ -61,6 +61,7 @@ describe("Wizard", function() {
         var w = new Wizard('testEl', {
             finalize: finalizeFn
         });
+        w.finalize();
         expect(finalizeFn).toHaveBeenCalled();
     });
 
