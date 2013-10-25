@@ -1,4 +1,4 @@
-/*! wizards - v0.1.0 - 2013-10-22
+/*! wizards - v0.1.0 - 2013-10-25
 * https://github.com/defrag/jquery-ajax-wizard
 * Copyright (c) 2013 Michal Dabrowski; Licensed MIT */
 (function($, w) {
@@ -99,7 +99,7 @@
             self.$content.find('.wizard-step').hide();
             self.$content.find('#wizard-step-'+step.id).show();
             self.currentStep = step;
-            return;
+            return $.Deferred().resolve().promise();
         }
 
         self.$loader.show();
